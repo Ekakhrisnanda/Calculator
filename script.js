@@ -1,25 +1,59 @@
+// basic math functions
 const add = (a, b) => a + b;
 const substract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
-const displayNumber = 0;
 
-const display = function(x) {
-    document.getElementById('display-container').innerHTML += x;
-}
+// get elements
+const display = document.querySelector('#display-container');
+const buttons = document.querySelectorAll('button');
 
-const operate = function(a, b, operator) {
+// variables to store the value
+let firstNum = null;
+let operator = null;
+let secondNum = null;
+
+
+const calculation = buttons.forEach(button => button.addEventListener('click', function() {
+    let buttonValue = this.innerHTML;
+
+    if (!isNaN(buttonValue)) {
+        display.innerHTML += buttonValue;
+    } else if (buttonValue === '+') {
+        firstNum = parseFloat(display.innerHTML);
+        operator = buttonValue;
+        display.innerHTML = '';
+    } else if (buttonValue === '-') {
+        firstNum = parseFloat(display.innerHTML);
+        operator = buttonValue;
+        display.innerHTML = '';
+    } else if (buttonValue === 'x') {
+        firstNum = parseFloat(display.innerHTML);
+        operator = buttonValue;
+        display.innerHTML = '';
+    } else if (buttonValue === ':') {
+        firstNum = parseFloat(display.innerHTML);
+        operator = buttonValue;
+        display.innerHTML = '';
+    } else if (buttonValue === '=') {
+        secondNum = parseFloat(display.innerHTML);
+        let result = operate(firstNum, secondNum);
+        display.innerHTML = result;
+    }
+}));
+
+const operate = function(firstNum, secondNum) {
     switch(operator) {
         case '+':
-            return add(a, b);
+            return add(firstNum, secondNum);
             break;
         case '-':
-            return substract(a, b);
+            return substract(firstNum, secondNum);
             break;
         case 'x':
-            return multiply(a, b);
+            return multiply(firstNum, secondNum);
             break;
         case ':':
-            return divide(a, b);
+            return divide(firstNum, secondNum);
     }
 }
